@@ -2,19 +2,19 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  namespace: rocketmq
-  name: configmap-rocketmq-console-ng-prod
+  namespace: csop-dev
+  name: configmap-rocketmq-console-ng
 data:
-  JAVA_OPTS: "-Drocketmq.namesrv.addr=statefulset-rocketmq-namesrv-prod-0.service-rocketmq-namesrv-prod.rocketmq:9876;statefulset-rocketmq-namesrv-prod-1.service-rocketmq-namesrv-prod.rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+  JAVA_OPTS: "-Drocketmq.namesrv.addr=rocketmq-namesrv-0.service-rocketmq-namesrv.csop-dev:9876;rocketmq-namesrv-1.service-rocketmq-namesrv.csop-dev:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: rocketmq
-  name: service-rocketmq-console-ng-prod
+  namespace: csop-dev
+  name: service-rocketmq-console-ng
   labels:
-    app: service-rocketmq-console-ng-prod
+    app: service-rocketmq-console-ng
 spec:
   externalIPs:
     - 47.95.229.53
@@ -24,23 +24,23 @@ spec:
     targetPort: 8080
     nodePort: 30018
   selector:
-    app: pod-rocketmq-console-ng-prod
+    app: pod-rocketmq-console-ng
   type: NodePort
 
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  namespace: rocketmq
-  name: deployment-rocketmq-console-ng-prod
+  namespace: csop-dev
+  name: rocketmq-console-ng
   labels:
-    app: deployment-rocketmq-console-ng-prod
+    app: rocketmq-console-ng
 spec:
   # 1 个实例
   replicas: 1
   selector:
     matchLabels:
-      app: pod-rocketmq-console-ng-prod
+      app: pod-rocketmq-console-ng
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -49,14 +49,14 @@ spec:
   template:
     metadata:
       labels:
-        app: pod-rocketmq-console-ng-prod
+        app: pod-rocketmq-console-ng
     spec:
       containers:
       - image: styletang/rocketmq-console-ng
         securityContext:
           privileged: true
         imagePullPolicy: IfNotPresent
-        name: container-rocketmq-console-ng-prod
+        name: container-rocketmq-console-ng
         ports:
         - protocol: TCP
           containerPort: 8080
@@ -64,7 +64,7 @@ spec:
         # 挂载configmap-apollo-portal-server相关配置
         envFrom:
         - configMapRef:
-            name: configmap-rocketmq-console-ng-prod
+            name: configmap-rocketmq-console-ng
         # 计算资源分配
         resources:
           # 初始请求资源

@@ -2,17 +2,17 @@
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: rocketmq
-  name: service-rocketmq-namesrv-prod
+  namespace: csop-dev
+  name: service-rocketmq-namesrv
   labels:
-    app: service-rocketmq-namesrv-prod
+    app: service-rocketmq-namesrv
 spec:
   ports:
   - protocol: TCP
     port: 9876
     targetPort: 9876
   selector:
-    app: pod-rocketmq-namesrv-prod
+    app: pod-rocketmq-namesrv
   type: ClusterIP
   clusterIP: None
   sessionAffinity: ClientIP
@@ -21,22 +21,22 @@ spec:
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
-  namespace: rocketmq
-  name: statefulset-rocketmq-namesrv-prod
+  namespace: csop-dev
+  name: rocketmq-namesrv
   labels:
-    app: statefulset-rocketmq-namesrv-prod
+    app: rocketmq-namesrv
 spec:
   replicas: 2
-  serviceName: service-rocketmq-namesrv-prod
+  serviceName: service-rocketmq-namesrv
   selector:
     matchLabels:
-      app: pod-rocketmq-namesrv-prod
+      app: pod-rocketmq-namesrv
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: pod-rocketmq-namesrv-prod
+        app: pod-rocketmq-namesrv
     spec:
       nodeSelector:
         node-role.kubernetes.io/rocketmq: "true"
@@ -48,7 +48,7 @@ spec:
         securityContext:
           privileged: true
         imagePullPolicy: Always
-        name: container-rocketmq-namesrv-prod
+        name: container-rocketmq-namesrv
         ports:
         - protocol: TCP
           containerPort: 9876
@@ -83,7 +83,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - pod-rocketmq-namesrv-prod
+                  - pod-rocketmq-namesrv
               topologyKey: kubernetes.io/hostname
 
       dnsPolicy: ClusterFirst
