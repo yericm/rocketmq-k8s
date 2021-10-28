@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-FROM 192.168.0.134:9990/rocketmq-base:4.5.1
+FROM 112.124.238.67/library/rocketmq-base:4.5.1
 #FROM szss/rocketmq-base:4.3.1
 
 EXPOSE 9876

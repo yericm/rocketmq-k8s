@@ -42,9 +42,9 @@ spec:
         node-role.kubernetes.io/rocketmq: "true"
       hostNetwork: true
       imagePullSecrets:
-      - name: nexus-secret
+      - name: harbor
       containers:
-      - image: 192.168.0.134:9990/rocketmq-namesrv:4.5.1
+      - image: 112.124.238.67/library/rocketmq-namesrv:4.5.1
         securityContext:
           privileged: true
         imagePullPolicy: Always

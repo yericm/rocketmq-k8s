@@ -38,7 +38,7 @@ RUN mkdir -p \
 
 # 
 # get the version
-RUN curl http://ftp.cuhk.edu.hk/pub/packages/apache.org/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o /opt/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip \
+RUN curl https://archive.apache.org/dist/rocketmq/4.5.1/rocketmq-all-4.5.1-bin-release.zip -o /opt/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip \
  && unzip -d /opt /opt/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip \
  && mv /opt/rocketmq-all-${ROCKETMQ_VERSION}-bin-release ${ROCKETMQ_HOME} \
  && rm -rf /opt/rocketmq-all*
