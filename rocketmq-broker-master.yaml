@@ -5,7 +5,7 @@ metadata:
   namespace: csop-dev
   name: configmap-rocketmq-broker-master
 data:
-  NAMESRV_ADDR: "rocketmq-namesrv-0.service-rocketmq-namesrv.csop-dev:9876;rocketmq-namesrv-1.service-csop-dev-namesrv.rocketmq:9876"
+  NAMESRV_ADDR: "rocketmq-namesrv-0.service-rocketmq-namesrv.csop-dev:9876;rocketmq-namesrv-1.service-rocketmq-namesrv.csop-dev:9876"
   BROKER_ID: "0"
   BROKER_ROLE: "ASYNC_MASTER"
   STATEFULSET_NAME: "rocketmq-broker-master"
