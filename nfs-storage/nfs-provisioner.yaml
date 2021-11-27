@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nfs-client-provisioner
-  namespace: default
+  namespace: rocketmq
 spec:
   replicas: 1
   selector:

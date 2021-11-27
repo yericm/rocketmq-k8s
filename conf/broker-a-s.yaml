@@ -5,7 +5,7 @@ data:
     brokerClusterName=DefaultCluster
     brokerName=broker-a
     brokerId=1
-    namesrvAddr=mq-ns.default.svc.cluster.local:9876
+    namesrvAddr=mq-ns.rocketmq.svc.cluster.local:9876
     defaultTopicQueueNums=4
     autoCreateTopicEnable=true
     autoCreateSubscriptionGroup=true
@@ -31,4 +31,4 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: broker-a-s
-  namespace: default
+  namespace: rocketmq

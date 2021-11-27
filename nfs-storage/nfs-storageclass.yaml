@@ -3,7 +3,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nfs-storage
-  namespace: default
+  namespace: rocketmq
   annotations:
     storageclass.kubernetes.io/is-default-class: "false"  ## 是否设置为默认的storageclass
 provisioner: nfs-client                                   ## 动态卷分配者名称，必须和上面创建的"provisioner"变量中设置的Name一致

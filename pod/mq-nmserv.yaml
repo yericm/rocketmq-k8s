@@ -4,7 +4,7 @@ metadata:
   labels:
     app: mq-namesrv
   name: mq-ns
-  namespace: default
+  namespace: rocketmq
 spec:
   type: ClusterIP
   ports:
@@ -18,10 +18,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mq-namesrv
-  namespace: default
+  namespace: rocketmq
 spec:
   serviceName: mq-namesrv
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mq-namesrv

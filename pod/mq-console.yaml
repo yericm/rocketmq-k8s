@@ -4,7 +4,7 @@ metadata:
   labels:
     app: mq-console
   name: mq-cs
-  namespace: default
+  namespace: rocketmq
 spec:
   type: NodePort
   ports:
@@ -19,7 +19,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mq-console
-  namespace: default
+  namespace: rocketmq
 spec:
   replicas: 1
   selector:
@@ -48,7 +48,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: JAVA_OPTS
-            value: "-Drocketmq.namesrv.addr=mq-ns.default.svc.cluster.local:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+            value: "-Drocketmq.namesrv.addr=mq-ns.rocketmq.svc.cluster.local:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
         readinessProbe:
           tcpSocket:
             port: 8080
