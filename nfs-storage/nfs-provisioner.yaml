@@ -27,11 +27,11 @@ spec:
             - name: PROVISIONER_NAME
               value: nfs-client
             - name: NFS_SERVER
-              value: 192.168.12.156
+              value: 10.211.55.18
             - name: NFS_PATH
               value: /data/rocketmq
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.12.156
+            server: 10.211.55.18
             path: /data/rocketmq
