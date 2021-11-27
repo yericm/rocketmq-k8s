@@ -31,20 +31,9 @@ spec:
      labels:
        app: broker-a
     spec:
-      # affinity:
-      #   #podAntiAffinity 反亲合性
-      #   podAntiAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       - labelSelector:
-      #           matchExpressions:
-      #             - key: "app"
-      #               operator: In
-      #               values:
-      #                 - broker-a
-      #         topologyKey: "kubernetes.io/hostname"
       containers:
       - name: broker-a
-        image: foxiswho/rocketmq:4.8.0   #下面使用的是用官方地址自行构建的镜像，推荐直接使用这个
+        image: foxiswho/rocketmq:4.8.0
         imagePullPolicy: IfNotPresent
         env:
           - name: TZ
@@ -72,7 +61,6 @@ spec:
       - name: broker-config
         configMap:
           name: broker-a
-      #启动依赖
       initContainers:
       - name: init-mq-ns
         image: busybox:latest

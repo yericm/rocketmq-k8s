@@ -1,24 +1,49 @@
-# 部署rocketmq 集群 环境
+# k8s 部署 rocketmq
 
-## docker 部署
-[docker](./docker/)
+两主两从,同步复制异步刷盘。
 
+## 准备nfs 服务器
 
-## k8s 部署
-[kubernetes](./k8s/)
+需nfs共享目录存在，脚本文件需要修改nfs地址和目录。
 
+## 创建 nfs-client 动态 storage
 
-## 快速部署 nfs
 ```bash
-python3 k8s/init_nfs.py
+kubectl apply -f nfs_storage/
 ```
 
-## 镜像构建
+## 创建rocketmq 使用的配置文件
 
-### rocketmq 镜像
+```bash
+kubectl apply -f conf/
+```
 
-[rocketmq-image](./image-build/build-rocketmq)
+## 启动 nameserv、broker、mq-console
 
-### rocketmq-dashboard 镜像
+```bash
+kubectl apply -f pod/
+```
 
-[rocketmq-dashboard](./image-build/build-dashboard)
+这一步保险起见先单独执行pod里面的  **mq-nmserv.yaml**，运行成功后在集体跑上面的命令。
+
+## 测试
+
+```bash
+#进入容器
+kubectl exec -it broker-a-0 -n rocketmq -- /bin/bash
+# 进行生产消息测试
+sh tools.sh org.apache.rocketmq.example.quickstart.Producer
+sh tools.sh org.apache.rocketmq.example.quickstart.Consumer # 消费消息
+```
+
+**浏览器访问console界面**
+
+```bash
+http://ip:30808
+```
+
+## nameserver地址
+
+```bash
+mq-ns.rocketmq.svc.cluster.local:9876
+```

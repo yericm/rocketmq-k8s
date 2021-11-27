@@ -25,7 +25,7 @@ data:
     checkTransactionMessageEnable=false
     sendMessageThreadPoolNums=16
     pullMessageThreadPoolNums=16
-    brokerRole=ASYNC_MASTER
+    brokerRole=SYNC_MASTER
     flushDiskType=ASYNC_FLUSH
 kind: ConfigMap
 metadata:

@@ -18,21 +18,20 @@ spec:
       serviceAccount: nfs-provisioner
       containers:
         - name: nfs-client-provisioner
-          #image: gcr.io/k8s-staging-sig-storage/nfs-subdir-external-provisioner:v4.0.0
           image: registry.cn-beijing.aliyuncs.com/mydlq/nfs-subdir-external-provisioner:v4.0.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: nfs-client-root
-              mountPath:  /persistentvolumes
+              mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
               value: nfs-client
             - name: NFS_SERVER
               value: 192.168.12.156
             - name: NFS_PATH
-              value: /data/demo
+              value: /data/rocketmq
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.12.156
-            path: /data/demo
+            path: /data/rocketmq

@@ -30,17 +30,6 @@ spec:
      labels:
        app: mq-namesrv
     spec:
-      # affinity:
-      #   #podAntiAffinity 反亲合性
-      #   podAntiAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       - labelSelector:
-      #           matchExpressions:
-      #             - key: "app"
-      #               operator: In
-      #               values:
-      #                 - mq-namesrv
-      #         topologyKey: "kubernetes.io/hostname"
       containers:
       - name: mq-namesrv
         image: foxiswho/rocketmq:4.8.0
